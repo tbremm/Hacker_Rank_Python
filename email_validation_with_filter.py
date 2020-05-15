@@ -28,55 +28,64 @@
 # Output Format
 # Output a list containing the valid email addresses in lexicographical order. If the list is empty, just output an
 # empty list, [].
+import re  # use to make this faster (see bottom of file for re version)
 
+# Faster with regular expression - replace all below with this
+email_list = []
+for i in range(int(input())):
+    email_list.append(input())
+print(sorted(list(filter(lambda x: re.search(r'^[\w\d-]+@[A-Za-z0-9]+\.\w?\w?\w$', x), email_list))))
+
+# Below is a larger, slower way, but provides some potentially useful helpers if re is not available
 
 # The username can only contain letters, digits, dashes and underscores
-def is_username_valid(un):
-    un = un.replace('-', '')  # Hyphens are allowed
-    un = un.replace('_', '')  # Underscores are allowed
-    return un.isalnum()
+# def is_username_valid(un):
+#     un = un.replace('-', '')  # Hyphens are allowed
+#     un = un.replace('_', '')  # Underscores are allowed
+#     return un.isalnum()
+#
+#
+# # Returns true if the domain is alphanumeric
+# def is_domain_valid(domain):
+#     return domain.isalnum()
+#
+#
+# def is_ext_valid(ext):
+#     return ext.isalnum() and len(ext) <= 3
+#
+#
+# def is_email_valid(email):
+#     # return True if email is a valid email, else return False
+#     first_split = email.split('@')  # Get the username first (username[0])
+#     if len(first_split) != 2:  # We have more or less than one '@' - not allowed
+#         print('not exactly one @')
+#         return False
+#     if not is_username_valid(first_split[0]):
+#         print('un invalid')
+#         return False
+#     second_split = first_split[1].split('.')  # Get the domain (second_split[0]) and ext (second_split[1])
+#     if len(second_split) != 2:  # Can't have more or less than one '.'
+#         print('Not exactly one .')
+#         return False
+#     if not is_domain_valid(second_split[0]):
+#         print('Domain invalid')
+#         return False
+#     if not is_ext_valid(second_split[1]):
+#         print('Ext invalid')
+#         return False
+#     return True
+#
+#
+# def filter_mail(emails):
+#     return list(filter(is_email_valid, emails))
+#
 
+# n = int(input())
+# email_list = []
+# for _ in range(n):
+#     email_list.append(input())
+#
+# filtered_emails = filter_mail(email_list)
+# filtered_emails.sort()
+# print(filtered_emails)
 
-# Returns true if the domain is alphanumeric
-def is_domain_valid(domain):
-    return domain.isalnum()
-
-
-def is_ext_valid(ext):
-    return ext.isalnum() and len(ext) <= 3
-
-
-def is_email_valid(email):
-    # return True if email is a valid email, else return False
-    first_split = email.split('@')  # Get the username first (username[0])
-    if len(first_split) != 2:  # We have more or less than one '@' - not allowed
-        print('not exactly one @')
-        return False
-    if not is_username_valid(first_split[0]):
-        print('un invalid')
-        return False
-    second_split = first_split[1].split('.')  # Get the domain (second_split[0]) and ext (second_split[1])
-    if len(second_split) != 2:  # Can't have more or less than one '.'
-        print('Not exactly one .')
-        return False
-    if not is_domain_valid(second_split[0]):
-        print('Domain invalid')
-        return False
-    if not is_ext_valid(second_split[1]):
-        print('Ext invalid')
-        return False
-    return True
-
-
-def filter_mail(emails):
-    return list(filter(is_email_valid, emails))
-
-
-n = int(input())
-email_list = []
-for _ in range(n):
-    email_list.append(input())
-
-filtered_emails = filter_mail(email_list)
-filtered_emails.sort()
-print(filtered_emails)
