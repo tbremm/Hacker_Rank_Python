@@ -23,7 +23,7 @@
 #
 # Output Format
 # Print a single integer denoting the number of letter a's in the first n letters of the infinite string created by
-# repeating s infinitely many times.
+# repeating s infinitely many times. 
 
 
 def repeatedString(s, n):
