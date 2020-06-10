@@ -5,9 +5,6 @@ def calc(a, b, c, d):
     return pow(a, b) + pow(c, d)
 
 
-a_in = int(input())
-b_in = int(input())
-c_in = int(input())
-d_in = int(input())
+a_in, b_in, c_in, d_in = (int(input()) for _ in range(4))
 
 print(calc(a_in, b_in, c_in, d_in))
